@@ -8,7 +8,7 @@
 		/**
 		 * @var array IP des tricheurs.
 		 */
-		public static $ips_cheater = ['212.227.116.145'];
+		public static $ips_cheater = [];
 
 
 		/**
@@ -32,8 +32,21 @@
 		 * @param string $ip
 		 * @return boolean
 		 */
-		public static function checkIp( $ip ) {
-			return in_array($ip , self::$ips_cheater );
+		private function checkIp( $ip ) {
+			return in_array($ip , self::getIp() );
 		}
+
+
+		/**
+		 * Récupère les IPs blacklistées dans le fichier de settings
+		 * @param string $ip
+		 * @return boolean
+		 */
+		private function getIp() {
+			self::$ips_cheater = explode(',', $GLOBALS['ini_settings']['IPblacklists']);
+		}
+
+
+
 
 	}
